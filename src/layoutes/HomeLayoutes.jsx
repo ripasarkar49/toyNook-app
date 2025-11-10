@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
 import Slider from "../components/Slider";
+import Footer from "../components/Footer";
 
 const HomeLayoutes = () => {
   return (
@@ -17,7 +18,9 @@ const HomeLayoutes = () => {
       <main>
         <Outlet></Outlet>
       </main>
-      <footer></footer>
+      <footer>
+        <Footer></Footer>
+      </footer>
     </div>
   );
 };
