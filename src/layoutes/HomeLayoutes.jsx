@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
 import Slider from "../components/Slider";
 import Footer from "../components/Footer";
+import Home from "../pages/Home";
 
 const HomeLayoutes = () => {
   return (
@@ -16,7 +17,9 @@ const HomeLayoutes = () => {
         </section>
       </header>
       <main>
+        
         <Outlet></Outlet>
+        
       </main>
       <footer>
         <Footer></Footer>

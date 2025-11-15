@@ -1,10 +1,19 @@
 import { createBrowserRouter } from "react-router";
 import HomeLayoutes from "../layoutes/HomeLayoutes";
+import Home from "../pages/Home";
+import Toys from "../layoutes/Toys";
+import ToysData from "../components/ToysData";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayoutes></HomeLayoutes>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+    ],
   },
   {
     path: "/auth",
@@ -12,7 +21,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/toys",
-    element: <h2>Toyes layoutes</h2>,
+    element: <Toys></Toys>,
+    children: [
+      {
+        path: "/toys",
+        element:<ToysData></ToysData>
+      },
+    ],
   },
   {
     path: "/*",
