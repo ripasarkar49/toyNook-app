@@ -10,7 +10,7 @@ const Navbar = () => {
       <Link to="/toys">
         <li className="m-2 text-xl">Toys</li>
       </Link>
-      <a className="btn mr-2 text-xl">Login</a>
+      <Link to="/auth/login" className="btn mr-2 text-xl">Login</Link>
     </>
   );
   return (

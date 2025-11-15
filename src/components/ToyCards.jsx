@@ -27,10 +27,10 @@ const ToyCards = ({ toys }) => {
                 ? toy.description.slice(0, 110) + "..."
                 : toy.description}
               <Link
-                to={""}
+                to={`/toy-details/:${toy.toyId}`}
                 className="text-primary cursor-pointer hover:underline font-semibold ml-1"
               >
-                Read More
+                View More
               </Link>
             </p>
           </div>
