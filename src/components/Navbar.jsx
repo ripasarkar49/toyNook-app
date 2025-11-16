@@ -1,7 +1,20 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
 import userIcon from "../assets/user.png";
+import { AuthContext } from "../Provider/AuthProvider";
+
 const Navbar = () => {
+  const { user, logout } = use(AuthContext);
+  const handleLogout = () => {
+    // console.log("user trying to log out");
+    logout()
+      .then(() => {
+        alert("Logged out successfully!");
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+  };
   const links = (
     <>
       <Link to="/">
@@ -10,7 +23,15 @@ const Navbar = () => {
       <Link to="/toys">
         <li className="m-2 text-xl">Toys</li>
       </Link>
-      <Link to="/auth/login" className="btn mr-2 text-xl">Login</Link>
+      {user ? (
+        <button onClick={handleLogout} className="btn mr-2 text-xl">
+          Logout
+        </button>
+      ) : (
+        <Link to="/auth/login" className="btn mr-2 text-xl">
+          Login
+        </Link>
+      )}
     </>
   );
   return (
@@ -38,6 +59,7 @@ const Navbar = () => {
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
+            <div>{user && user.email}</div>
             {links}
           </ul>
         </div>

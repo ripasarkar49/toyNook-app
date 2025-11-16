@@ -11,15 +11,14 @@ const HomeLayoutes = () => {
       <header>
         <section>
           <Navbar></Navbar>
+  
         </section>
         <section>
           <Slider></Slider>
         </section>
       </header>
       <main>
-        
         <Outlet></Outlet>
-        
       </main>
       <footer>
         <Footer></Footer>
