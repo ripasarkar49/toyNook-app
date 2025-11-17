@@ -1,13 +1,14 @@
 import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
-
+import { FaGoogle } from "react-icons/fa";
+import Swal from "sweetalert2";
 const Login = () => {
   const [error, setError] = useState("");
-  const { signIn } = use(AuthContext);
+  const { signIn, googleLogin } = use(AuthContext);
   const location = useLocation();
   const Navigate = useNavigate();
-  console.log(location);
+  //   console.log(location);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,14 +17,34 @@ const Login = () => {
     const password = form.password.value;
     console.log({ email, password });
     signIn(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
         Navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         const errorCode = error.code;
         setError(errorCode);
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        Navigate(location.state ? location.state : "/");
+      })
+      .catch((error) => {
+        setError(error.message);
       });
   };
   return (
@@ -59,6 +80,12 @@ const Login = () => {
               Login
             </button>
             {error && <p className="text-red-600 text-xs">{error}</p>}
+            <button
+              onClick={handleGoogleLogin}
+              className="btn btn-secondary btn-outline w-full"
+            >
+              <FaGoogle size={24} /> Login With Google
+            </button>
           </fieldset>
           <p>
             Don't have an account?{" "}

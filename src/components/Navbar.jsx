@@ -2,14 +2,19 @@ import React, { use } from "react";
 import { Link } from "react-router";
 import userIcon from "../assets/user.png";
 import { AuthContext } from "../Provider/AuthProvider";
-
+import Swal from "sweetalert2";
 const Navbar = () => {
   const { user, logout } = use(AuthContext);
   const handleLogout = () => {
     // console.log("user trying to log out");
     logout()
       .then(() => {
-        alert("Logged out successfully!");
+        Swal.fire({
+          icon: "success",
+          title: "LogOut Successful!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
       })
       .catch((Error) => {
         console.log(Error);

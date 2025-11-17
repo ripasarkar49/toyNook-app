@@ -1,10 +1,12 @@
 import React, { use, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
-
+import { FaGoogle } from "react-icons/fa";
+import Swal from "sweetalert2";
 const Register = () => {
-  const { createUser, setUser, updateUser } = use(AuthContext);
+  const { createUser, setUser, updateUser, googleLogin } = use(AuthContext);
   const [nameError, setNameError] = useState("");
+  const location = useLocation();
 
   const navigate = useNavigate();
   const handleRegister = (e) => {
@@ -29,7 +31,7 @@ const Register = () => {
         updateUser({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photo });
-            navigate("/");
+            Navigate(location.state ? location.state : "/auth/login");
           })
           .catch((error) => {
             console.log(error);
@@ -40,6 +42,21 @@ const Register = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorMessage);
+      });
+  };
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        Navigate(location.state ? location.state : "/");
+      })
+      .catch((error) => {
+        setError(error.message);
       });
   };
   return (
@@ -90,6 +107,12 @@ const Register = () => {
 
             <button type="submit" className="btn btn-neutral mt-4">
               Register
+            </button>
+            <button
+              onClick={handleGoogleLogin}
+              className="btn btn-secondary btn-outline w-full"
+            >
+              <FaGoogle size={24} /> Login With Google
             </button>
             <p className="pt-4">
               Already have an account. Please{" "}
