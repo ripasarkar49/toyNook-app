@@ -3,8 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 const Login = () => {
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { signIn, googleLogin } = use(AuthContext);
   const location = useLocation();
   const Navigate = useNavigate();
@@ -47,6 +49,10 @@ const Login = () => {
         setError(error.message);
       });
   };
+  const handleTogglePass = (event) => {
+    event.preventDefault();
+    setShowPassword(!showPassword);
+  };
   return (
     <div className="flex justify-center items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-4">
@@ -66,13 +72,21 @@ const Login = () => {
             />
             {/* password */}
             <label className="label">Password</label>
-            <input
-              name="password"
-              type="password"
-              className="input"
-              placeholder="Password"
-              required
-            />
+            <div className="relative">
+              <input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                className="input"
+                placeholder="Password"
+                required
+              />
+              <button
+                onClick={handleTogglePass}
+                className="btn btn-xs top-2 right-5 absolute"
+              >
+                {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
+              </button>
+            </div>
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>

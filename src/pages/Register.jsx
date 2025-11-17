@@ -3,11 +3,12 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 const Register = () => {
   const { createUser, setUser, updateUser, googleLogin } = use(AuthContext);
   const [nameError, setNameError] = useState("");
   const location = useLocation();
-
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ const Register = () => {
         updateUser({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photo });
-            Navigate(location.state ? location.state : "/auth/login");
+            navigate(location.state ? location.state : "/auth/login");
           })
           .catch((error) => {
             console.log(error);
@@ -53,11 +54,15 @@ const Register = () => {
           timer: 1500,
           showConfirmButton: false,
         });
-        Navigate(location.state ? location.state : "/");
+        navigate(location.state ? location.state : "/");
       })
       .catch((error) => {
         setError(error.message);
       });
+  };
+  const handleTogglePass = (event) => {
+    event.preventDefault();
+    setShowPassword(!showPassword);
   };
   return (
     <div className="flex justify-center items-center">
@@ -97,14 +102,21 @@ const Register = () => {
             />
             {/* password */}
             <label className="label">Password</label>
-            <input
-              name="password"
-              type="password"
-              className="input"
-              placeholder="Password"
-              required
-            />
-
+            <div className="relative">
+              <input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                className="input"
+                placeholder="Password"
+                required
+              />
+              <button
+                onClick={handleTogglePass}
+                className="btn btn-xs top-2 right-5 absolute"
+              >
+                {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
+              </button>
+            </div>
             <button type="submit" className="btn btn-neutral mt-4">
               Register
             </button>
