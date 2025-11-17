@@ -22,7 +22,7 @@ const ToyCards = ({ toys }) => {
                 ? toy.description.slice(0, 110) + "..."
                 : toy.description}
               <Link
-                to={`/toy-details/:${toy.toyId}`}
+                to={`/toy-details/${toy.toyId}`}
                 className="text-primary cursor-pointer hover:underline font-semibold ml-1"
               >
                 View More
