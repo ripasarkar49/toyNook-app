@@ -17,7 +17,6 @@ const BannerHero = () => {
             Shop Now
           </button>
         </div>
-
         <div className="md:w-1/2 mt-10 md:mt-0 flex justify-center">
           <img
             src={banner}

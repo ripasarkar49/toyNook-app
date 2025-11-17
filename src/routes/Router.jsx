@@ -7,6 +7,7 @@ import ToyDetails from "../pages/ToyDetails";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AuthLayouts from "../layoutes/AuthLayouts";
+import PrivateRoutes from "../Provider/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/toys",
-    element: <Toys></Toys>,
+    element: (
+      <PrivateRoutes>
+        <Toys></Toys>
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "/toys",
@@ -45,10 +50,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/toy-details/:toyId",
-    element: <ToyDetails></ToyDetails>,
+    element: (
+      <PrivateRoutes>
+        <ToyDetails></ToyDetails>
+      </PrivateRoutes>
+    ),
     loader: () => fetch("/toys.json"),
   },
-  { 
+  {
     path: "/*",
     element: <h2>Error 404</h2>,
   },
