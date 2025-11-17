@@ -2,7 +2,7 @@ import React from "react";
 import banner from "../assets/herobanner.png";
 const BannerHero = () => {
   return (
-    <div className="w-full  rounded-2xl bg-[#a2e0ff]">
+    <div className="w-full mt-10 rounded-2xl bg-[#a2e0ff]">
       <div className="max-w-6xl mx-auto gap-1 flex flex-col  md:flex-row items-center justify-between py-6 px-10">
         <div className="md:w-1/2 space-y-4 ">
           <p className="text-[#d97c6e] font-semibold text-lg">

@@ -36,6 +36,10 @@ const ToyDetailsCards = ({ toy }) => {
             <span className="font-semibold">Seller:</span> {toy.sellerName} (
             {toy.sellerEmail})
           </p>
+          <p className="mb-1">
+            <span className="font-semibold">SubCategory:</span> {toy.subCategory} (
+            {toy.subCategory})
+          </p>
         </div>
         <div className="mt-4">
           <Link className="btn btn-secondary" to="/toys">

@@ -70,9 +70,10 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <img
-          className="w-12 rounded-full"
+          className="w-12 rounded-full cursor-pointer"
           src={`${user ? user.photoURL : userIcon}`}
-          alt=""
+          alt="user"
+          title={user ? user.displayName : "Guest"}
         />
       </div>
     </div>

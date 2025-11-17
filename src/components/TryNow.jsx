@@ -25,7 +25,7 @@ const TryNow = () => {
 
     setTimeout(() => {
       setIsSubmitted(false);
-    }, 5000);
+    }, 7000);
   };
   return (
     <div className="w-full mt-10  rounded-2xl bg-[#eef3f1]">
@@ -36,7 +36,7 @@ const TryNow = () => {
           </h3>
           {isSubmitted ? (
             <div className="p-3 mb-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-              🎉 **Success! Request has been submitted. We'll be in touch soon!
+              **Success! Request has been submitted. We'll be in touch soon!
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-3">
