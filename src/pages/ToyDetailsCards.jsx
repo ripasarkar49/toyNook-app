@@ -3,10 +3,10 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router";
 
 const ToyDetailsCards = ({ toy }) => {
-  console.log(toy);
+  //   console.log(toy);
 
   return (
-    <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row gap-5">
+    <div className=" mx-auto bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row gap-5">
       <div className="md:w-1/3 flex justify-center items-center bg-gray-100 p-4">
         <img
           src={toy.pictureURL}
@@ -37,11 +37,10 @@ const ToyDetailsCards = ({ toy }) => {
             {toy.sellerEmail})
           </p>
         </div>
-
         <div className="mt-4">
-          <Link className="btn btn-secondary" to="/">
+          <Link className="btn btn-secondary" to="/toys">
             <IoMdArrowRoundBack />
-            Back to Home
+            Back to Toys
           </Link>
         </div>
       </div>

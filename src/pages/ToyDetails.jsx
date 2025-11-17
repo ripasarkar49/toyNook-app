@@ -3,12 +3,13 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ToyDetailsCards from "./ToyDetailsCards";
 import { useLoaderData, useParams } from "react-router";
+import TryNow from "../components/TryNow";
 
 const ToyDetails = () => {
   const data = useLoaderData();
   const { toyId } = useParams();
   const [toy, setToy] = useState({});
-    console.log(data, toyId, toy);
+    // console.log(data, toyId, toy);
 
   useEffect(() => {
     const toyDetails = data.find((single) => single.toyId === parseInt(toyId));
@@ -22,7 +23,13 @@ const ToyDetails = () => {
         <Navbar></Navbar>
       </header>
       <main className="w-11/12 mx-auto py-5 ">
-        <ToyDetailsCards toy={toy}></ToyDetailsCards>
+       <section>
+         <ToyDetailsCards toy={toy}></ToyDetailsCards>
+       </section>
+       <section>
+        <TryNow></TryNow>
+       </section>
+       
       </main>
 
       <footer>
