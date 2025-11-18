@@ -18,7 +18,7 @@ const Navbar = () => {
           showConfirmButton: false,
         });
       })
-      .catch((Error) => console.log(Error));
+      .catch((error) => console.log(error));
   };
 
   const links = (
@@ -48,10 +48,7 @@ const Navbar = () => {
       <div className="w-11/12 mx-auto my-3 navbar bg-base-200 shadow-sm">
         <div className="navbar-start">
           {/* Mobile hamburger */}
-          <button
-            className="lg:hidden mr-3"
-            onClick={() => setOpen(true)}
-          >
+          <button className="lg:hidden mr-3" onClick={() => setOpen(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-7 w-7"
@@ -59,13 +56,20 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
           </button>
 
-          <a className="btn btn-ghost text-3xl font-bold">ToyNook</a>
+          <a className="btn btn-ghost text-3xl font-extrabold ">
+            <span className="bg-gradient-to-r from-pink-500 to-blue-900 text-transparent bg-clip-text">
+              ToyNook
+            </span>
+          </a>
         </div>
 
         <div className="navbar-end">
@@ -99,14 +103,10 @@ const Navbar = () => {
           <span className="font-bold text-xl">
             {user ? user.email : "Guest User"}
           </span>
-          <button onClick={() => setOpen(false)}>
-            ✕
-          </button>
+          <button onClick={() => setOpen(false)}>✕</button>
         </div>
 
-        <ul className="p-4 text-lg">
-          {links}
-        </ul>
+        <ul className="p-4 text-lg">{links}</ul>
       </div>
     </>
   );

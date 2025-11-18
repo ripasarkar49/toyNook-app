@@ -18,7 +18,7 @@ const TryNow = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Try Now Form Submitted:", formData);
+    // console.log("Try Now Form Submitted:", formData);
 
     setFormData({ name: "", email: "" });
     setIsSubmitted(true);
