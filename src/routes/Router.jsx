@@ -10,6 +10,7 @@ import AuthLayouts from "../layoutes/AuthLayouts";
 import PrivateRoutes from "../Provider/PrivateRoutes";
 import Loading from "../pages/Loading";
 import ForgetPassword from "../pages/ForgetPassword";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -66,7 +67,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/*",
-    element: <h2>Error 404</h2>,
+    element: <NotFound></NotFound>,
   },
 ]);
 export default router;

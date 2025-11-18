@@ -1,10 +1,11 @@
 import React, { use, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const ForgetPassword = () => {
   const location = useLocation();
+    const navigate = useNavigate();
   const { resetPassword } = use(AuthContext);
   const emailFromLogin = location.state || "";
   const [email, setEmail] = useState(emailFromLogin);
@@ -20,6 +21,7 @@ const ForgetPassword = () => {
           title: "Password reset email sent!",
           text: "Check your Gmail inbox",
         });
+        navigate(location.state ? location.state : "/auth/login");
       })
       .catch((error) => {
         Swal.fire({
