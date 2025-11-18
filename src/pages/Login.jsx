@@ -94,6 +94,7 @@ const Login = () => {
               Login
             </button>
             {error && <p className="text-red-600 text-xs">{error}</p>}
+            <p className="font-bold text-center py-1 ">OR</p>
             <button
               onClick={handleGoogleLogin}
               className="btn btn-secondary btn-outline w-full"

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 const Register = () => {
   const { createUser, setUser, updateUser, googleLogin } = use(AuthContext);
+  const [error, setError] = useState("");
   const [nameError, setNameError] = useState("");
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
@@ -25,12 +26,28 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log({ name, photo, email, password });
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+      setError(
+        "password must be an Uppercase , Lowercase & at least 6 character"
+      );
+      return;
+    }
+
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         // console.log(user);
         updateUser({ displayName: name, photoURL: photo })
           .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Account create Successful!",
+              timer: 1500,
+              showConfirmButton: false,
+            });
             setUser({ ...user, displayName: name, photoURL: photo });
             navigate(location.state ? location.state : "/auth/login");
           })
@@ -40,7 +57,7 @@ const Register = () => {
           });
       })
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorMessage);
       });
@@ -120,6 +137,8 @@ const Register = () => {
             <button type="submit" className="btn btn-neutral mt-4">
               Register
             </button>
+            {error && <p className="text-red-500">{error}</p>}
+            <p className="font-bold text-center py-1 ">OR</p>
             <button
               onClick={handleGoogleLogin}
               className="btn btn-secondary btn-outline w-full"
