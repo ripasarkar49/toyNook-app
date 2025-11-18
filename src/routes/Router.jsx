@@ -9,6 +9,7 @@ import Register from "../pages/Register";
 import AuthLayouts from "../layoutes/AuthLayouts";
 import PrivateRoutes from "../Provider/PrivateRoutes";
 import Loading from "../pages/Loading";
+import ForgetPassword from "../pages/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,11 @@ const router = createBrowserRouter([
       </PrivateRoutes>
     ),
     loader: () => fetch("/toys.json"),
-    hydrateFallbackElement:<Loading></Loading>
+    hydrateFallbackElement: <Loading></Loading>,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword></ForgetPassword>,
   },
   {
     path: "/*",

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 const Login = () => {
   const [error, setError] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { signIn, googleLogin } = use(AuthContext);
   const location = useLocation();
@@ -69,6 +70,7 @@ const Login = () => {
               className="input"
               placeholder="Email"
               required
+              onChange={(e) => setUserEmail(e.target.value)}
             />
             {/* password */}
             <label className="label">Password</label>
@@ -88,7 +90,9 @@ const Login = () => {
               </button>
             </div>
             <div>
-              <a className="link link-hover">Forgot password?</a>
+              <Link to="/forget-password" state={userEmail} className="link link-hover">
+                Forgot password?
+              </Link>
             </div>
             <button type="submit" className="btn btn-neutral mt-4">
               Login
