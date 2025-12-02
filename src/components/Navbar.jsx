@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import userIcon from "../assets/user.png";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
-
+import logo from "../assets/paw_logo.png";
 const Navbar = () => {
   const { user, logout } = use(AuthContext);
   const [open, setOpen] = useState(false);
@@ -21,33 +21,39 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
 
-  const links = (
+  const navLinks = (
     <>
       <Link to="/">
         <li className="m-2 text-xl">Home</li>
       </Link>
-      <Link to="/toys">
-        <li className="m-2 text-xl">Toys</li>
+
+      <Link to="/pets">
+        <li className="m-2 text-xl">Pets & Supplies</li>
       </Link>
 
-      {user ? (
-        <button onClick={handleLogout} className="btn mr-2 text-xl">
-          Logout
-        </button>
-      ) : (
-        <Link to="/auth/login" className="btn mr-2 text-xl">
-          Login
-        </Link>
+      {user && (
+        <>
+          <Link to="/add-listing">
+            <li className="m-2 text-xl">Add Listing</li>
+          </Link>
+
+          <Link to="/my-listings">
+            <li className="m-2 text-xl">My Listings</li>
+          </Link>
+
+          <Link to="/my-orders">
+            <li className="m-2 text-xl">My Orders</li>
+          </Link>
+        </>
       )}
     </>
   );
 
   return (
     <>
-      {/* ====== NAVBAR ====== */}
       <div className="w-11/12 mx-auto my-3 navbar bg-base-200 shadow-sm">
+        {/* LEFT: Logo */}
         <div className="navbar-start">
-          {/* Mobile hamburger */}
           <button className="lg:hidden mr-3" onClick={() => setOpen(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -65,28 +71,61 @@ const Navbar = () => {
             </svg>
           </button>
 
-          <a className="btn btn-ghost text-3xl font-extrabold ">
-            <span className="bg-gradient-to-r from-pink-500 to-blue-900 text-transparent bg-clip-text">
-              ToyNook
-            </span>
-          </a>
+          <div className="flex gap-2">
+            <img src={logo} alt="" className="w-8 h-8" />
+            <a className=" text-3xl font-extrabold ">
+              <span className="bg-linear-to-r from-pink-500 to-blue-900 text-transparent bg-clip-text">
+                PawMart
+              </span>
+            </a>
+          </div>
         </div>
 
-        <div className="navbar-end">
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{links}</ul>
-          </div>
+        {/* MIDDLE LINKS */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+        </div>
 
-          <img
-            className="w-12 rounded-full cursor-pointer"
-            src={`${user ? user.photoURL : userIcon}`}
-            alt="user"
-            title={user ? user.displayName : "Guest"}
-          />
+        {/* RIGHT SIDE */}
+        <div className="navbar-end flex items-center gap-3">
+          {/* BEFORE LOGIN → Login | Register */}
+          {!user && (
+            <>
+              <Link
+                to="/auth/login"
+                className="btn bg-blue-600 text-white hover:bg-blue-700"
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/auth/register"
+                className="btn bg-linear-to-r from-pink-500 to-purple-600 text-white"
+              >
+                Register
+              </Link>
+            </>
+          )}
+
+          {/* AFTER LOGIN → Avatar + Logout */}
+          {user && (
+            <>
+              <img
+                className="w-12 rounded-full cursor-pointer"
+                src={user?.photoURL || userIcon}
+                alt="user"
+                title={user?.displayName}
+              />
+
+              <button onClick={handleLogout} className="btn bg-linear-to-r from-pink-500 to-purple-600 text-white">
+                Logout
+              </button>
+            </>
+          )}
         </div>
       </div>
 
-      {/* ====== DRAWER OVERLAY (mobile only) ====== */}
+      {/* Drawer Overlay */}
       {open && (
         <div
           className="fixed inset-0 bg-black/40 z-40"
@@ -94,7 +133,7 @@ const Navbar = () => {
         ></div>
       )}
 
-      {/* ====== DRAWER ====== */}
+      {/* Drawer Panel */}
       <div
         className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg z-50 transform transition-transform duration-300 
         ${open ? "translate-x-0" : "-translate-x-full"}`}
@@ -106,7 +145,25 @@ const Navbar = () => {
           <button onClick={() => setOpen(false)}>✕</button>
         </div>
 
-        <ul className="p-4 text-lg">{links}</ul>
+        <ul className="p-4 text-lg">{navLinks}</ul>
+
+        {/* Drawer right-side items */}
+        <div className="p-4 border-t">
+          {!user ? (
+            <>
+              <Link to="/auth/login" className="btn w-full mb-2">
+                Login
+              </Link>
+              <Link to="/auth/register" className="btn w-full">
+                Register
+              </Link>
+            </>
+          ) : (
+            <button onClick={handleLogout} className="btn w-full">
+              Logout
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
